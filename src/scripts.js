@@ -18,26 +18,25 @@
   function getJsonForPage() {
     const path = window.location.pathname.toLowerCase();
 
-    if (path.includes("deadends")) return "deadEnds.json";
-    if (path.includes("mothjelly")) return "mjs.json";
+    if (path.includes("deadends")) return "/deadEnds.json";
+    if (path.includes("mothjelly")) return "/mjs.json";
 
     return null;
   }
 
   async function loadImages() {
     try {
-      const jsonFile = getJsonForPage();
+      const jsonPath = getJsonForPage();
 
       console.log("Page:", window.location.pathname);
       console.log("track found?", !!track, "prev?", !!prevBtn, "next?", !!nextBtn);
-      console.log("Using JSON file:", jsonFile);
+      console.log("Using JSON path:", jsonPath);
 
-      if (!jsonFile) throw new Error("No JSON mapping for this page.");
+      if (!jsonPath) throw new Error("No JSON mapping for this page.");
 
-      const jsonUrl = new URL(jsonFile, window.location.href);
-      const res = await fetch(jsonUrl, { cache: "no-store" });
+      const res = await fetch(jsonPath, { cache: "no-store" });
 
-      console.log("Fetching:", jsonUrl.toString(), "Status:", res.status);
+      console.log("Fetching:", jsonPath, "Status:", res.status);
 
       if (!res.ok) throw new Error(`Failed to load JSON: ${res.status}`);
 
