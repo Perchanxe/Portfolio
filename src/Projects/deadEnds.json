@@ -1,0 +1,17 @@
+{
+    "project": "Dead Ends",
+    "images": [
+        {
+            "src": "../../media/images/deadEnds/Backrooms.png",
+            "alt": "Dead Ends gameplay screenshot"
+        },
+        {
+            "src": "../../media/images/deadEnds/deadEnds1.png",
+            "alt": "Dead Ends interior environment"
+        },
+        {
+            "src": "../../media/images/deadEnds/deadEnds2.png",
+            "alt": "Dead Ends player perspective"
+        }
+    ]
+}

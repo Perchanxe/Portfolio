@@ -1,0 +1,9 @@
+{
+    "project": "mjs",
+    "images": [
+        {
+            "src": "../../media/images/Mjs/mjs.png",
+            "alt": "Moth Jelly Studios logo"
+        }
+    ]
+}

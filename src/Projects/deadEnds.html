@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+        <link
+            href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap"
+            rel="stylesheet"
+        />
+
+        <link rel="stylesheet" href="../style.css" />
+
+        <title>Dead Ends | Asadullah Al-jayashi</title>
+        <meta
+            name="description"
+            content="Dead Ends — an 8-player Unity horror game featuring custom P2P networking and proximity voice chat."
+        />
+    </head>
+
+    <body>
+        <a class="skip-link" href="#main">Skip to content</a>
+
+        <nav class="nav" aria-label="Primary">
+            <a class="nav-link" href="../../index.html">Home</a>
+            <a class="nav-link" href="../../index.html#work">Work</a>
+            <a class="nav-link" href="../../index.html#about">About</a>
+            <a class="nav-link" href="../../index.html#skills">Skills</a>
+            <a class="nav-link" href="../../index.html#contact">Contact</a>
+        </nav>
+
+        <main id="main" class="page">
+            <section class="section project-hero">
+                <div class="project-hero-left">
+                    <h1 class="title">Dead Ends</h1>
+                    <p class="subtitle">8-player Unity horror game • P2P networking • Proximity voice chat</p>
+
+                    <p class="body-text">
+                        A multiplayer horror game built in Unity. I designed and implemented core gameplay systems,
+                        peer-to-peer networking, and proximity-based voice chat with a focus on responsiveness,
+                        stability, and clear player feedback.
+                    </p>
+
+                    <div class="project-actions">
+                        <a
+                            class="btn"
+                            href="https://mothjellystudios.itch.io/dead-ends"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                        >
+                            Play on Itch.io
+                        </a>
+                    </div>
+
+                    <div class="project-meta">
+                        <div class="panel">
+                            <h2 class="panel-title">Role &amp; Scope</h2>
+                            <ul class="list">
+                                <li><strong>Role:</strong> Gameplay / Systems Engineer</li>
+                                <li><strong>Focus:</strong> Multiplayer systems, real-time gameplay, UX clarity</li>
+                                <li><strong>Engine:</strong> Unity (C#)</li>
+                                <li><strong>Team:</strong> Small team (I owned networking + core systems)</li>
+                            </ul>
+                        </div>
+
+                        <div class="panel">
+                            <h2 class="panel-title">Tech Stack</h2>
+                            <ul class="list">
+                                <li>C#</li>
+                                <li>Unity</li>
+                                <li>P2P networking</li>
+                                <li>Proximity voice chat</li>
+                                <li>Git collaboration</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="project-hero-right">
+                    <figure class="featured carousel">
+                        <a
+                            href="https://mothjellystudios.itch.io/dead-ends"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            aria-label="Play Backrooms Hide and Seek on Itch.io"
+                        >
+                            <!-- CAROUSEL ADDED (content unchanged) -->
+                            <div class="carousel-track" id="carouselTrack"></div>
+                            <button class="carousel-btn prev" aria-label="Previous image">‹</button>
+                            <button class="carousel-btn next" aria-label="Next image">›</button>
+                        </a>
+
+                        <figcaption>
+                            <strong>Featured:</strong> Backrooms: Hide &amp; Seek<br />
+                            Multiplayer horror with custom P2P networking &amp; proximity voice chat
+                        </figcaption>
+                    </figure>
+                </div>
+            </section>
+
+            <section class="section">
+                <div class="section-head">
+                    <h2 class="section-title">How I Built This</h2>
+                </div>
+
+                <div class="project-grid">
+                    <div class="panel">
+                        <h3 class="panel-title">Networking Architecture</h3>
+                        <ul class="list">
+                            <li>Designed a P2P session flow: lobby → host selection → join/leave handling</li>
+                            <li>Implemented state replication for player movement and key interactions</li>
+                            <li>Added interpolation/smoothing so remote players feel stable under latency</li>
+                            <li>Built resilient message handling (validation, sequencing, and edge cases)</li>
+                        </ul>
+                    </div>
+
+                    <div class="panel">
+                        <h3 class="panel-title">Proximity Voice Chat</h3>
+                        <ul class="list">
+                            <li>Integrated proximity-based attenuation (distance affects volume)</li>
+                            <li>Ensured voice state stays consistent across joins/leaves</li>
+                            <li>Focused on UX clarity: who you can hear, when, and why</li>
+                            <li>Tested under real play sessions to tune ranges and mixing</li>
+                        </ul>
+                    </div>
+
+                    <div class="panel">
+                        <h3 class="panel-title">Gameplay Systems</h3>
+                        <ul class="list">
+                            <li>Core interaction loop: hiding, seeking, traversal, player feedback</li>
+                            <li>Systemized UI + prompts so interactions are readable during panic moments</li>
+                            <li>Iterated quickly using debug toggles and in-editor tools</li>
+                        </ul>
+                    </div>
+
+                    <div class="panel">
+                        <h3 class="panel-title">Stability &amp; Debugging</h3>
+                        <ul class="list">
+                            <li>Added logging hooks for networking events to reproduce desync issues</li>
+                            <li>Created stress tests for join/leave and rapid state changes</li>
+                            <li>Tracked down race conditions and “late join” inconsistencies</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="code-note">
+                    <p class="body-text">
+                        <strong>Note on source:</strong> Code is private due to commercial/game IP concerns.
+                        I’m happy to do a code walkthrough or share a limited private repo on request for recruiters/hiring teams.
+                    </p>
+                </div>
+            </section>
+
+            <section class="section">
+                <div class="section-head">
+                    <h2 class="section-title">Results &amp; Next Improvements</h2>
+                    <p class="section-subtitle">What shipped, what I learned, what I’d do next.</p>
+                </div>
+
+                <div class="project-grid">
+                    <div class="panel">
+                        <h3 class="panel-title">What Shipped</h3>
+                        <ul class="list">
+                            <li>Playable multiplayer experience with voice proximity</li>
+                            <li>Stable core loop and readable player feedback</li>
+                            <li>System-driven approach to gameplay iteration</li>
+                        </ul>
+                    </div>
+
+                    <div class="panel">
+                        <h3 class="panel-title">If I Had More Time</h3>
+                        <ul class="list">
+                            <li>More robust host migration / reconnection handling</li>
+                            <li>More deterministic replication for specific interactions</li>
+                            <li>Automated playtest telemetry for balancing and tuning</li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+
+            <section class="section">
+                <div class="section-head">
+                    <h2 class="section-title">More Projects</h2>
+                    <p class="section-subtitle">Want another example?</p>
+                </div>
+
+                <div class="project-actions">
+                    <a class="btn" href="mothjellystudios.html">Moth Jelly website</a>
+                </div>
+
+                <p class="footer">© <span id="year"></span> Asadullah Al-jayashi</p>
+            </section>
+        </main>
+
+        <!-- External JS ONLY -->
+        <script src="../scripts.js" defer></script>
+    </body>
+</html>
