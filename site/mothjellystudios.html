@@ -44,12 +44,7 @@
                     </p>
 
                     <div class="project-actions">
-                        <a
-                            class="btn"
-                            href="https://mothjellystudios.com"
-                            target="_blank"
-                            rel="noopener noreferrer"
-                        >
+                        <a class="btn" href="https://mothjellystudios.com" target="_blank" rel="noopener noreferrer">
                             Visit Site
                         </a>
                     </div>
@@ -68,10 +63,10 @@
                         <div class="panel">
                             <h2 class="panel-title">Tech Stack</h2>
                             <ul class="list">
-                                <li>HTML / CSS</li>
+                                <li>Vite</li>
+                                <li>HTML</li>
+                                <li>Tailwind CSS</li>
                                 <li>JavaScript</li>
-                                <li>Responsive layout</li>
-                                <li>Asset optimization</li>
                             </ul>
                         </div>
                     </div>
@@ -85,7 +80,6 @@
                             rel="noopener noreferrer"
                             aria-label="Visit Moth Jelly Studios website"
                         >
-                            <!-- Carousel added (content unchanged) -->
                             <div class="carousel-track" id="carouselTrack"></div>
                             <button class="carousel-btn prev" aria-label="Previous image">‹</button>
                             <button class="carousel-btn next" aria-label="Next image">›</button>
@@ -109,36 +103,96 @@
                     <div class="panel">
                         <h3 class="panel-title">Information Architecture</h3>
                         <ul class="list">
-                            <li>Designed navigation to route visitors to shipped work fast</li>
-                            <li>Prioritized scannability: short sections, strong headings, minimal clutter</li>
-                            <li>Made “what we build” obvious within seconds</li>
+                            <li>
+                                Designed the homepage as a central hub: “Our Games” on the left and “Latest Blogs” on
+                                the right, so visitors immediately see both outputs.
+                            </li>
+                            <li>
+                                Kept navigation shallow: one click to a game page, one click to a specific blog post,
+                                and one click to Team/About/Discord.
+                            </li>
+                            <li>
+                                Ordered content intentionally: games listed by release timeline (oldest → newest for
+                                now) and blogs sorted newest → oldest to surface updates.
+                            </li>
+                            <li>
+                                Avoided splash screens, autoplay, and heavy landing content so visitors reach what
+                                they want as quickly as possible.
+                            </li>
                         </ul>
                     </div>
 
                     <div class="panel">
                         <h3 class="panel-title">Performance</h3>
                         <ul class="list">
-                            <li>Optimized images for fast loads and good visual clarity</li>
-                            <li>Kept UI lightweight (no heavy frameworks required)</li>
-                            <li>Styled components for readability on mobile first</li>
+                            <li>
+                                Built the site as a fully static application, serving pre-built HTML, CSS, and assets
+                                with no server-side rendering.
+                            </li>
+                            <li>
+                                Used Vite for fast development iteration and optimized production builds with minimal
+                                configuration.
+                            </li>
+                            <li>
+                                Loaded game and blog content from lightweight JSON files, keeping runtime logic simple
+                                and predictable.
+                            </li>
+                            <li>
+                                Kept JavaScript usage minimal (no framework runtime), avoiding unnecessary client-side
+                                work.
+                            </li>
+                            <li>
+                                Designed and tested the site mobile-first, manually verifying scrolling, layout, and
+                                readability across devices.
+                            </li>
+                            <li>
+                                Avoided heavy animations, third-party embeds, and analytics to keep load times fast
+                                and performance consistent.
+                            </li>
                         </ul>
                     </div>
 
                     <div class="panel">
                         <h3 class="panel-title">Reusable Layout System</h3>
                         <ul class="list">
-                            <li>Built consistent “sections” and “cards” so pages are easy to extend</li>
-                            <li>Created predictable spacing and typography rules</li>
-                            <li>Used a clean component-like pattern in plain HTML/CSS</li>
+                            <li>
+                                Built a single shared JavaScript renderer responsible for generating all game and blog
+                                cards across the site.
+                            </li>
+                            <li>
+                                Structured cards to be data-driven: adding a new game or blog requires only a title,
+                                image path, date, and optional tags.
+                            </li>
+                            <li>
+                                Kept a consistent page skeleton (navigation → content → footer) so new pages inherit
+                                the same layout rules automatically.
+                            </li>
+                            <li>
+                                Enforced consistent spacing, typography, and card structure to keep the site visually
+                                coherent as content grows.
+                            </li>
                         </ul>
                     </div>
 
                     <div class="panel">
                         <h3 class="panel-title">What I’d Improve Next</h3>
                         <ul class="list">
-                            <li>Add lightweight analytics (privacy-friendly) to learn what visitors click</li>
-                            <li>More case-study depth per game (technical + design notes)</li>
-                            <li>Optional presskit downloads per project</li>
+                            <li>
+                                Expand the site as the studio grows by adding more games and publishing more frequent
+                                blog updates.
+                            </li>
+                            <li>
+                                Add blog discovery features such as search and simple filters (by date or tag) to make
+                                older posts easier to find.
+                            </li>
+                            <li>
+                                Create press kit pages per project with screenshots, logos, trailers, and clear media
+                                contact information.
+                            </li>
+                            <li>
+                                Explore optional studio extensions over time (e.g., merch storefront), while keeping
+                                the core site lightweight.
+                            </li>
                         </ul>
                     </div>
                 </div>
@@ -158,7 +212,6 @@
             </section>
         </main>
 
-        <!-- External JS (no inline content removed) -->
         <script type="module" src="/src/main.js" defer></script>
     </body>
 </html>
