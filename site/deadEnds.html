@@ -59,9 +59,9 @@
                             <h2 class="panel-title">Role &amp; Scope</h2>
                             <ul class="list">
                                 <li><strong>Role:</strong> Gameplay / Systems Engineer</li>
-                                <li><strong>Focus:</strong> Multiplayer systems, real-time gameplay, UX clarity</li>
+                                <li><strong>Focus:</strong> Core gameplay systems, movement/physics, multiplayer, networking, player feedback/UX</li>
                                 <li><strong>Engine:</strong> Unity (C#)</li>
-                                <li><strong>Team:</strong> Small team (I owned networking + core systems)</li>
+                                <li><strong>Team:</strong> Small team (I owned gameplay + networking)</li>
                             </ul>
                         </div>
 
@@ -70,9 +70,10 @@
                             <ul class="list">
                                 <li>C#</li>
                                 <li>Unity</li>
-                                <li>P2P networking</li>
-                                <li>Proximity voice chat</li>
-                                <li>Git collaboration</li>
+                                <li>FishNet (P2P networking via steamworks)</li>
+                                <li>Git / Github</li>
+                                <li>Blender</li>
+                                <li>FMOD</li>
                             </ul>
                         </div>
                     </div>
@@ -86,7 +87,6 @@
                             rel="noopener noreferrer"
                             aria-label="Play Backrooms Hide and Seek on Itch.io"
                         >
-                            <!-- CAROUSEL ADDED (content unchanged) -->
                             <div class="carousel-track" id="carouselTrack"></div>
                             <button class="carousel-btn prev" aria-label="Previous image">‹</button>
                             <button class="carousel-btn next" aria-label="Next image">›</button>
@@ -108,38 +108,104 @@
                     <div class="panel">
                         <h3 class="panel-title">Networking Architecture</h3>
                         <ul class="list">
-                            <li>Designed a P2P session flow: lobby → host selection → join/leave handling</li>
-                            <li>Implemented state replication for player movement and key interactions</li>
-                            <li>Added interpolation/smoothing so remote players feel stable under latency</li>
-                            <li>Built resilient message handling (validation, sequencing, and edge cases)</li>
+                            <li>
+                                Built a Steam lobby flow (create/join via 5-digit code + invites), then used lobby state to coordinate
+                                match start and scene transition into gameplay.
+                            </li>
+                            <li>
+                                Wired the lobby host as the network host (Facepunch/Steam transport), and started Host/Client cleanly with
+                                safety checks + fallbacks to avoid “double start” or invalid states.
+                            </li>
+                            <li>
+                                Implemented a player initialization pipeline (SteamID + name sync, “ready” gating, and spawn handling) so
+                                clients don’t spawn until core managers and network state are valid.
+                            </li>
+                            <li>
+                                Handled asymmetric roles by spawning the monster server-side and transferring ownership to a randomly selected
+                                client, while enabling/disabling the correct local components per owner.
+                            </li>
+                            <li>
+                                Synced movement/animation reliably using client-authoritative transforms where appropriate and networked animator
+                                state updates, with despawn/death safety checks to prevent null spam during disconnects.
+                            </li>
                         </ul>
                     </div>
 
                     <div class="panel">
                         <h3 class="panel-title">Proximity Voice Chat</h3>
                         <ul class="list">
-                            <li>Integrated proximity-based attenuation (distance affects volume)</li>
-                            <li>Ensured voice state stays consistent across joins/leaves</li>
-                            <li>Focused on UX clarity: who you can hear, when, and why</li>
-                            <li>Tested under real play sessions to tune ranges and mixing</li>
+                            <li>
+                                Integrated Vivox positional voice chat and tied channel lifecycle directly to the multiplayer lobby
+                                (join/leave synchronized with match state).
+                            </li>
+                            <li>
+                                Registered players into the voice system using Steam identity, dynamically attaching voice taps
+                                and audio sources to spawned networked player objects.
+                            </li>
+                            <li>
+                                Implemented true proximity-based audio by combining Vivox 3D positioning with custom AudioSource
+                                rolloff curves to control volume falloff and max speaking distance.
+                            </li>
+                            <li>
+                                Kept voice state stable across joins, leaves, deaths, and scene transitions by explicitly updating
+                                player 3D positions each frame and re-binding ownership as needed.
+                            </li>
+                            <li>
+                                Built player-facing voice controls (mute self, mute others, per-player volume sliders, input device
+                                selection) with settings persistence across sessions.
+                            </li>
                         </ul>
                     </div>
 
                     <div class="panel">
-                        <h3 class="panel-title">Gameplay Systems</h3>
+                        <h3 class="panel-title">Gameplay &amp; Systems</h3>
                         <ul class="list">
-                            <li>Core interaction loop: hiding, seeking, traversal, player feedback</li>
-                            <li>Systemized UI + prompts so interactions are readable during panic moments</li>
-                            <li>Iterated quickly using debug toggles and in-editor tools</li>
+                            <li>
+                                Built a physics-driven first-person controller (walk/sprint/crouch/jump) with stamina
+                                and state-driven animation hooks for readable player feedback.
+                            </li>
+                            <li>
+                                Implemented slope-aware movement (surface-normal projection, velocity clamping, gravity handling)
+                                to keep movement stable across uneven geometry.
+                            </li>
+                            <li>
+                                Designed modular interactions using an <code>Interactables</code> interface and a player <code>Interactor</code>
+                                so gameplay objects remain decoupled and easy to extend.
+                            </li>
+                            <li>
+                                Built an inspection mechanic that moves objects into a camera-space view, supports rotate/zoom,
+                                and safely disables/re-enables player + camera input while inspecting.
+                            </li>
+                            <li>
+                                Added environmental readability systems (spotlight detection + smooth fade/flicker) to support stealth
+                                and communicate visibility to players.
+                            </li>
                         </ul>
                     </div>
 
                     <div class="panel">
-                        <h3 class="panel-title">Stability &amp; Debugging</h3>
+                        <h3 class="panel-title">Performance &amp; Player Readability</h3>
                         <ul class="list">
-                            <li>Added logging hooks for networking events to reproduce desync issues</li>
-                            <li>Created stress tests for join/leave and rapid state changes</li>
-                            <li>Tracked down race conditions and “late join” inconsistencies</li>
+                            <li>
+                                Designed a player-centric lighting system that enables and disables spotlights dynamically
+                                based on proximity, significantly reducing active light count during gameplay.
+                            </li>
+                            <li>
+                                Avoided per-frame lighting cost by fully disabling lights outside the player’s influence
+                                instead of leaving them active at zero intensity.
+                            </li>
+                            <li>
+                                Implemented smooth fade-in/out with coroutine state tracking to prevent overlapping transitions
+                                and visual popping when entering or exiting lit areas.
+                            </li>
+                            <li>
+                                Added subtle, low-cost flicker to active lights to preserve horror atmosphere without
+                                impacting performance.
+                            </li>
+                            <li>
+                                Used lighting as gameplay feedback to communicate visibility and danger to players,
+                                improving stealth readability in dark environments.
+                            </li>
                         </ul>
                     </div>
                 </div>
@@ -162,18 +228,40 @@
                     <div class="panel">
                         <h3 class="panel-title">What Shipped</h3>
                         <ul class="list">
-                            <li>Playable multiplayer experience with voice proximity</li>
-                            <li>Stable core loop and readable player feedback</li>
-                            <li>System-driven approach to gameplay iteration</li>
+                            <li>
+                                A complete 8-player multiplayer horror experience with proximity-based voice chat
+                                integrated directly into gameplay.
+                            </li>
+                            <li>
+                                A stable core gameplay loop (hiding, seeking, traversal) supported by responsive movement,
+                                readable interactions, and consistent player feedback.
+                            </li>
+                            <li>
+                                A working end-to-end multiplayer flow: lobby creation, joining, role assignment,
+                                gameplay, death/spectating, and match completion.
+                            </li>
+                            <li>
+                                Performance-aware systems (dynamic lighting, controlled replication, audio attenuation)
+                                that kept gameplay smooth during real play sessions.
+                            </li>
                         </ul>
                     </div>
 
                     <div class="panel">
                         <h3 class="panel-title">If I Had More Time</h3>
                         <ul class="list">
-                            <li>More robust host migration / reconnection handling</li>
-                            <li>More deterministic replication for specific interactions</li>
-                            <li>Automated playtest telemetry for balancing and tuning</li>
+                            <li>
+                                Expanded content variety with additional maps, monsters, and cosmetic customization
+                                to increase replayability.
+                            </li>
+                            <li>
+                                Built a more robust lobby UI allowing players to select roles (e.g., choose the monster)
+                                and configure match settings before starting.
+                            </li>
+                            <li>
+                                Improved lobby and matchmaking UX with clearer state indicators and smoother transitions
+                                between menus and gameplay.
+                            </li>
                         </ul>
                     </div>
                 </div>
@@ -193,7 +281,6 @@
             </section>
         </main>
 
-        <!-- External JS ONLY -->
         <script type="module" src="/src/main.js" defer></script>
     </body>
 </html>

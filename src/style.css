@@ -226,8 +226,7 @@ img{ max-width: 100%; display: block; }
 }
 
 .panel-title{
-  font-family: var(--font-pixel);
-  font-size: 12px;
+  font-size: 20px;
   margin-bottom: 12px;
 }
 
@@ -405,11 +404,9 @@ img{ max-width: 100%; display: block; }
    PROJECT PAGES (ADD-ON)
    ========================= */
 .project-hero{
-  display: grid;
-  grid-template-columns: 1.1fr .9fr;
-  gap: 22px;
   align-items: start;
 }
+
 
 .project-actions{
   display: flex;
